@@ -21,7 +21,19 @@ class Grid {
         console.log("Constructed grid object");
     }
 
-    update() {
+    display_cell_from_coords(coords_x, coords_y, col, scale_f) {
+
+        let x_cell = round(coords_x / this.res);
+        let y_cell = round(coords_y / this.res);
+        push();
+        fill(col);
+        noStroke();
+        rect(
+            this.grid[x_cell][y_cell].x,
+            this.grid[x_cell][y_cell].y,
+            this.res * scale_f
+        );
+        pop();
     }
 
     display_cell(x_cell, y_cell) {
@@ -31,10 +43,11 @@ class Grid {
         // );
         push();
         fill(255,255,255,230);
+        noStroke();
         rect(
             this.grid[x_cell][y_cell].x,
             this.grid[x_cell][y_cell].y,
-            res
+            this.res
         );
         pop();
     }
@@ -53,7 +66,7 @@ class Grid {
                 rect(
                     this.grid[i][j].x,
                     this.grid[i][j].y,
-                    res * size_f
+                    this.res * size_f
                 );
             }
         }
