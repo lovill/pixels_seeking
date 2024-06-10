@@ -14,12 +14,10 @@ let n_agents = 800;
 function setup() {
   createCanvas(400, 400);
   g = new Grid(res, width, height, pad);
-  a1 = new Agent(width/2, height/2, g);
-  a2 = new Agent(300, height/2, g);
 
   sep_slider1 = createSlider(0.1, 8, 5);
-  seek_slider2 = createSlider(0.01, 5, 2);
-  des_sep_slider3 = createSlider(0.01, 80, 10);
+  seek_slider2 = createSlider(0.01, 5, 3);
+  des_sep_slider3 = createSlider(0.01, 80, 15);
 
   for (let i = 0; i < n_agents; i++) {
     agents.push(
@@ -33,11 +31,16 @@ function setup() {
 }
 
 function draw() {
-  background(0);
-  // g.display_squares();
-  // g.display_centers();
-
-  // a1.wave_move();
+  background(15);
+  
+  let mx = mouseX;
+  let my = mouseY;
+  // if (mx < width - res && mx > res && my < height - res && my > res) {
+  //   g.display_cell_from_coords(
+  //     mouseX, mouseY, "red", 4.
+  //   );
+  // }
+  
 
   for (let a of agents) {
     a.applyBehaviors(agents);
