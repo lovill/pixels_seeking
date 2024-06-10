@@ -52,17 +52,17 @@ class Agent {
 
     // Separation
     // Method checks for nearby vehicles and steers away
-    separate(vehicles) {
+    separate(agents) {
         let desiredseparation = des_sep_slider3.value();
         let sum = createVector();
         let count = 0;
         // For every boid in the system, check if it's too close
-        for (let i = 0; i < vehicles.length; i++) {
-        let d = p5.Vector.dist(this.coords, vehicles[i].coords);
+        for (let i = 0; i < agents.length; i++) {
+        let d = p5.Vector.dist(this.coords, agents[i].coords);
         // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
         if ((d > 0) && (d < desiredseparation)) {
             // Calculate vector pointing away from neighbor
-            let diff = p5.Vector.sub(this.coords, vehicles[i].coords);
+            let diff = p5.Vector.sub(this.coords, agents[i].coords);
             diff.normalize();
             diff.div(d); // Weight by distance
             sum.add(diff);
@@ -87,10 +87,14 @@ class Agent {
     seek(target) {
         // let desired = p5.Vector.sub(target, this.coords); // A vector pointing from the location to the target
         let desired = p5.Vector.sub(this.coords, target); // A vector pointing from the location to the target
-
+        // let d = p5.Vector.dist(this.coords, target);
+        // console.log(d);
+        // d = d / 1000;
+        // console.log(d);
         // Normalize desired and scale to maximum speed
         desired.normalize();
         desired.mult(this.maxspeed);
+        // desired.mult(1/d);
         // Steering = Desired minus velocity
         let steer = p5.Vector.sub(desired, this.velocity);
         steer.limit(this.maxforce); // Limit to maximum steering force
