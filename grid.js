@@ -42,7 +42,7 @@ class Grid {
         //     this.grid[x_cell][y_cell].y,
         // );
         push();
-        fill(255,255,255,230);
+        fill("#28FF3D");
         noStroke();
         rect(
             this.grid[x_cell][y_cell].x,
